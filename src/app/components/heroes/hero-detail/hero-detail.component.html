@@ -1,0 +1,16 @@
+<form [formGroup]="form">
+  <mat-form-field>
+    <mat-label>Id</mat-label>
+    <input type="text" matInput formControlName="_id" readonly>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input type="text" matInput formControlName="name">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Superpower</mat-label>
+    <input type="text" matInput formControlName="superpower">
+  </mat-form-field>
+  <button mat-button (click)="onSave()" [disabled]="!form.valid">Save</button>
+  <button mat-button (click)="onCancel()">Cancel</button>
+</form>

@@ -1,0 +1,9 @@
+<form [formGroup]="form">
+  <section class="app-filter">
+    <mat-form-field>
+      <mat-label>Filter heroes</mat-label>
+      <input type="text" matInput formControlName="filter">
+    </mat-form-field>
+    <button mat-raised-button (click)="onClickSearch()">Search</button>
+  </section>
+</form>

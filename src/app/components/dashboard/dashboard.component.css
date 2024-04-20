@@ -1,0 +1,10 @@
+.app-dashboard{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f4f4f4;
+    color: #333;
+    font-size: 20px;
+    margin: 20px;
+    height: 89vh;
+}
