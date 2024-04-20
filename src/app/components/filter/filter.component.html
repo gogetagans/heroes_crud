@@ -2,7 +2,7 @@
   <section class="app-filter">
     <mat-form-field>
       <mat-label>Filter heroes</mat-label>
-      <input type="text" matInput formControlName="filter">
+      <input type="text" matInput formControlName="filter" (keyup.enter)="onClickSearch()">
     </mat-form-field>
     <button mat-raised-button (click)="onClickSearch()">Search</button>
   </section>

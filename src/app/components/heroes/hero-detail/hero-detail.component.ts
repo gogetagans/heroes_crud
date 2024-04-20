@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -11,6 +11,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { Hero } from '../../../../models/hero';
 import { HeroesService } from '../../../../services';
+import { Subscription } from 'rxjs';
+import UpperCaseInputDirective from '../../../directives/toUpperCase.directive';
 
 @Component({
   standalone: true,
@@ -22,9 +24,11 @@ import { HeroesService } from '../../../../services';
     MatInputModule,
     ReactiveFormsModule,
     MatButtonModule,
+    UpperCaseInputDirective
   ],
 })
-export default class HeroDetailComponent {
+export default class HeroDetailComponent implements OnDestroy {
+  suscription = new Subscription();
   editForm = false;
   form = new FormGroup({
     _id: new FormControl<string>(''),
@@ -37,42 +41,68 @@ export default class HeroDetailComponent {
     private router: Router,
     private heroService: HeroesService
   ) {
-    this.route.params.subscribe((params) => {
+   
+    this.suscription.add(this.route.params.subscribe((params) => {
       this.editForm = params['id'] !== 'new';
-
-      if (this.editForm) {
-        this.getHeroById(params['id']);
-      } else {
-        this.form.controls['_id'].disable();
-      }
-    });
+      this.editForm ? this.getHeroById(params['id']) : this.form.controls['_id'].disable();
+    }));
   }
 
+  /**
+   * Checks if the form is in edit mode.
+   * @returns True if the form is in edit mode, false otherwise.
+   */
   isEditForm(): boolean {
     return this.editForm;
   }
 
+  /**
+   * Saves the hero data.
+   */
   onSave(): void {
     const hero = this.form.value as Hero;
     this.isEditForm() ? this.updateHero(hero) : this.saveHero(hero);
   }
 
+  /**
+   * Cancels the form and navigates back to the heroes list.
+   */
   onCancel(): void {
-    this.router.navigate(['../heroes'])
+    this.router.navigate(['../heroes']);
   }
 
+  /**
+   * Saves a new hero.
+   * @param hero The hero to be saved.
+   */
   saveHero(hero: Hero): void {
     this.heroService.addHero(hero);
-    this.router.navigate(['../heroes'])
-    }
+    this.router.navigate(['../heroes']);
+  }
 
+  /**
+   * Retrieves a hero by its ID and populates the form with its data.
+   * @param id The ID of the hero to retrieve.
+   */
   getHeroById(id: string): void {
     this.heroService.getHeroById(id).subscribe((hero) => {
       this.form.patchValue(hero);
     });
   }
+
+  /**
+   * Updates an existing hero.
+   * @param hero The updated hero data.
+   */
   updateHero(hero: Hero): void {
     this.heroService.updateHero(hero);
-    this.router.navigate(['../heroes'])
+    this.router.navigate(['../heroes']);
+  }
+
+  /**
+   * Unsubscribes from the route params subscription.
+   */
+  ngOnDestroy(): void {
+    this.suscription.unsubscribe();
   }
 }
