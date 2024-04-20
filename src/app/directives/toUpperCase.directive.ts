@@ -12,7 +12,7 @@ import { DefaultValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     },
   ],
 })
-export default  class UpperCaseInputDirective extends DefaultValueAccessor {
+export class UpperCaseInputDirective extends DefaultValueAccessor {
   @HostListener('input', ['$event']) input($event: InputEvent) {
     const target = $event.target as HTMLInputElement;
     const start = target.selectionStart;

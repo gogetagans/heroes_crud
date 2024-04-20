@@ -19,4 +19,12 @@ export default class ConfirmationModalComponent {
 
   constructor(public dialogRef: MatDialogRef<ConfirmationModalComponent>) { }
 
+  onClickCancel() {
+    this.dialogRef.close(false);
+  }
+
+  onClickConfirm() {
+    this.dialogRef.close(true);
+  }
+
 }

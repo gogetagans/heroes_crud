@@ -12,7 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { Hero } from '../../../../models/hero';
 import { HeroesService } from '../../../../services';
 import { Subscription } from 'rxjs';
-import UpperCaseInputDirective from '../../../directives/toUpperCase.directive';
+import { UpperCaseInputDirective } from '../../../directives/toUpperCase.directive';
 
 @Component({
   standalone: true,
@@ -24,12 +24,12 @@ import UpperCaseInputDirective from '../../../directives/toUpperCase.directive';
     MatInputModule,
     ReactiveFormsModule,
     MatButtonModule,
-    UpperCaseInputDirective
+    UpperCaseInputDirective,
   ],
 })
 export default class HeroDetailComponent implements OnDestroy {
-  suscription = new Subscription();
-  editForm = false;
+  private suscription = new Subscription();
+  private editForm = false;
   form = new FormGroup({
     _id: new FormControl<string>(''),
     name: new FormControl<string>('', Validators.required),
@@ -41,11 +41,14 @@ export default class HeroDetailComponent implements OnDestroy {
     private router: Router,
     private heroService: HeroesService
   ) {
-   
-    this.suscription.add(this.route.params.subscribe((params) => {
-      this.editForm = params['id'] !== 'new';
-      this.editForm ? this.getHeroById(params['id']) : this.form.controls['_id'].disable();
-    }));
+    this.suscription.add(
+      this.route.params.subscribe((params) => {
+        this.editForm = params['id'] !== 'new';
+        this.editForm
+          ? this.getHeroById(params['id'])
+          : this.form.controls['_id'].disable();
+      })
+    );
   }
 
   /**
@@ -85,9 +88,9 @@ export default class HeroDetailComponent implements OnDestroy {
    * @param id The ID of the hero to retrieve.
    */
   getHeroById(id: string): void {
-    this.heroService.getHeroById(id).subscribe((hero) => {
-      this.form.patchValue(hero);
-    });
+    this.heroService
+      .getHeroById(id)
+      .subscribe((hero) => this.form.patchValue(hero));
   }
 
   /**

@@ -4,7 +4,7 @@
 <section class="app-list">
   <mat-list>
     <mat-list-item *ngFor="let hero of heroes$ | async">
-      <span>{{ hero.name | capitalletter}} {{ hero.superpower }}</span>
+      <span><strong>Name: </strong> {{ hero.name | capitalletter}} <strong>Superpower:</strong> {{ hero.superpower }}</span>
       <button mat-button (click)="onClickHero(hero)">View Detail</button>
       <button mat-button (click)="onClickDeleteHero(hero)">Delete</button>
       <mat-divider></mat-divider> 

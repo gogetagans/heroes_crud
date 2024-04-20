@@ -7,12 +7,10 @@ import { Subject, Subscription } from 'rxjs';
   providedIn: 'root',
 })
 export default class ModalService implements OnDestroy{
-  subscription = new Subscription();
+  private subscription = new Subscription();
   private confirmActionSubject$ = new Subject<void>();
-  
-  constructor(public dialog: MatDialog) {
-    this.subscription.add(this.dialog.afterAllClosed.subscribe(() => this.confirmActionSubject$.next()));
-  }
+
+  constructor(public dialog: MatDialog) {}
   
   get confirmAction$() {
     return this.confirmActionSubject$.asObservable();
@@ -22,7 +20,13 @@ export default class ModalService implements OnDestroy{
    * Opens a dialog to display a confirmation modal.
   */
  openDialog() {
-   this.dialog.open(ConfirmationModalComponent, { width: '250px' });
+   const dialogRef = this.dialog.open(ConfirmationModalComponent, { width: '250px' });
+
+   this.subscription.add(dialogRef.afterClosed().subscribe((action: boolean) => {
+     if (action) {
+       this.confirmActionSubject$.next();
+     }
+   }));
   }
 
   ngOnDestroy(): void {

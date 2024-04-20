@@ -1,17 +1,24 @@
 /* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
 
-import { ConfirmationModalComponent } from './confirmationModal.component';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent, MatDialogRef } from '@angular/material/dialog';
+import  ConfirmationModalComponent  from './confirmationModal.component';
 
 describe('ConfirmationModalComponent', () => {
   let component: ConfirmationModalComponent;
   let fixture: ComponentFixture<ConfirmationModalComponent>;
+  let dialogRefMock: MatDialogRef<ConfirmationModalComponent>;
 
   beforeEach(async(() => {
+    dialogRefMock = jasmine.createSpyObj('MatDialogRef', ['close']);
+
     TestBed.configureTestingModule({
-      declarations: [ ConfirmationModalComponent ]
+      declarations: [ ConfirmationModalComponent ],
+      imports: [ MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent ],
+      providers: [
+        { provide: MatDialogRef, useValue: dialogRefMock }
+      ]
     })
     .compileComponents();
   }));
@@ -24,5 +31,15 @@ describe('ConfirmationModalComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should close dialog with false value when cancel button is clicked', () => {
+    component.onClickCancel();
+    expect(dialogRefMock.close).toHaveBeenCalledWith(false);
+  });
+
+  it('should close dialog with true value when confirm button is clicked', () => {
+    component.onClickConfirm();
+    expect(dialogRefMock.close).toHaveBeenCalledWith(true);
   });
 });
