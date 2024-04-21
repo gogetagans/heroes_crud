@@ -1,10 +1,12 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Hero } from '../../models/hero';
 import { BehaviorSubject, Observable, catchError } from 'rxjs';
 import { API_URL } from '../../environment';
 import MessageService from '../messageService/message.service';
+import { BaseService } from '../base/base.service';
+import { LoaderService } from '../loader/loader.service';
+
 
 
 @Injectable({
@@ -13,7 +15,7 @@ import MessageService from '../messageService/message.service';
 /**
  * Service for managing heroes.
  */
-export class HeroesService {
+export class HeroesService extends BaseService{
   readonly api_url = API_URL;
   private heroesObs$: BehaviorSubject<Hero[]> = new BehaviorSubject<Hero[]>([]);
   private heroes: Hero[] = [];
@@ -24,9 +26,12 @@ export class HeroesService {
   }
 
   constructor(
-    private http: HttpClient,
-    private messageService: MessageService
-  ) {}
+    override http: HttpClient,
+    private messageService: MessageService,
+    override loaderService: LoaderService
+  ) {
+    super(http, loaderService);
+  }
 
   getHeroes() {
     this.http

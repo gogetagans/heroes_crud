@@ -10,6 +10,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import FilterComponent from '../../filter/filter.component';
 import ModalService from '../../../../services/modalService/modalService.service';
+import SpinnerComponent from '../../shared/components/spinner/spinner.component';
 
 @Component({
   standalone: true,
@@ -24,7 +25,7 @@ import ModalService from '../../../../services/modalService/modalService.service
     MatButtonModule,
     FilterComponent,
     MatListModule,
-    MatDividerModule,
+    MatDividerModule
   ],
 })
 export default class HeroListComponent implements OnDestroy {
