@@ -12,7 +12,7 @@ import {
   standalone: true,
   selector: 'app-confirmationModal',
   templateUrl: './confirmationModal.component.html',
-  styleUrls: ['./confirmationModal.component.css'],
+  styleUrls: ['./confirmationModal.component.scss'],
   imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent],
 })
 export default class ConfirmationModalComponent {

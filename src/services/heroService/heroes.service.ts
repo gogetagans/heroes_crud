@@ -138,14 +138,8 @@ export class HeroesService {
    * Handles the error response from an HTTP request.
    * @returns A function that takes an `HttpErrorResponse` object as a parameter and handles the error.
    */
-  private _handleError(): (error: HttpErrorResponse) => void {
+  private _handleError(): void {
     this.messageService.showMessage('An error occurred. Please try again later.');
-
-    return ({ error }: HttpErrorResponse) => {
-      if (error instanceof Event) {
-        throw error;
-      }
-    };
   }
 
   /**

@@ -18,7 +18,7 @@ import { UpperCaseInputDirective } from '../../../directives/toUpperCase.directi
   standalone: true,
   selector: 'app-hero-detail',
   templateUrl: './hero-detail.component.html',
-  styleUrls: ['./hero-detail.component.css'],
+  styleUrls: ['./hero-detail.component.scss'],
   imports: [
     MatFormFieldModule,
     MatInputModule,

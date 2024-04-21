@@ -15,7 +15,7 @@ import ModalService from '../../../../services/modalService/modalService.service
   standalone: true,
   selector: 'app-hero-list',
   templateUrl: './hero-list.component.html',
-  styleUrls: ['./hero-list.component.css'],
+  styleUrls: ['./hero-list.component.scss'],
   imports: [
     AsyncPipe,
     NgIf,

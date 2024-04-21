@@ -15,7 +15,7 @@ import { HeroesService } from '../../../services';
   standalone: true,
   selector: 'app-filter',
   templateUrl: './filter.component.html',
-  styleUrls: ['./filter.component.css'],
+  styleUrls: ['./filter.component.scss'],
   imports: [
     ReactiveFormsModule,
     MatFormFieldModule,

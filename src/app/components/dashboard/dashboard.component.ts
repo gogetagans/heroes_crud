@@ -5,7 +5,7 @@ import {MatButtonModule} from '@angular/material/button';
   standalone: true,
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css'],
+  styleUrls: ['./dashboard.component.scss'],
   imports: [MatButtonModule]
 })
 export default class DashboardComponent{
