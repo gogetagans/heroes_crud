@@ -3,12 +3,11 @@ import {
   HttpInterceptor,
   HttpRequest,
   HttpHandler,
-  HttpEvent
+  HttpEvent,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { LoaderService } from '../../../services/loader/loader.service';
-
 
 @Injectable()
 export class LoaderInterceptor implements HttpInterceptor {
@@ -19,7 +18,7 @@ export class LoaderInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     this.loaderService.showLoader();
-    
+
     return next.handle(request).pipe(
       finalize(() => {
         this.loaderService.hideLoader();
