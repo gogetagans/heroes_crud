@@ -10,14 +10,23 @@ export class LoaderService {
 
   constructor() {}
 
+  /**
+   * Observable that emits the current loading state.
+   */
   get isLoading$(): Observable<boolean> {
     return this.loadingSubject.asObservable();
   }
 
+  /**
+   * Shows the loader.
+   */
   showLoader(): void {
     this.loadingSubject.next(true);
   }
 
+  /**
+   * Hides the loader.
+   */
   hideLoader(): void {
     this.loadingSubject.next(false);
   }

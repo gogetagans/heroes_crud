@@ -13,8 +13,6 @@ export default class SpinnerComponent{
   isLoading= false;
   constructor(private loaderService: LoaderService) { 
     this.loaderService.isLoading$.subscribe((isLoading) => {
-      console.log('SpinnerComponent: ', isLoading);
-      
       this.isLoading = isLoading;
     });
   }

@@ -14,8 +14,8 @@ describe('ConfirmationModalComponent', () => {
     dialogRefMock = jasmine.createSpyObj('MatDialogRef', ['close']);
 
     TestBed.configureTestingModule({
-      declarations: [ ConfirmationModalComponent ],
-      imports: [ MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent ],
+      declarations: [],
+      imports: [ ConfirmationModalComponent,MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent ],
       providers: [
         { provide: MatDialogRef, useValue: dialogRefMock }
       ]

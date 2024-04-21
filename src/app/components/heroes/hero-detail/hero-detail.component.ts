@@ -28,6 +28,7 @@ import { UpperCaseInputDirective } from '../../../directives/toUpperCase.directi
   ],
 })
 export default class HeroDetailComponent implements OnDestroy {
+
   private suscription = new Subscription();
   private editForm = false;
   form = new FormGroup({

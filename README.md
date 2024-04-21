@@ -1,10 +1,6 @@
 # API Service
 
-First of all, go to the link to generate the ID to send GET, POST, PUT and DELETE requests on page [CRUDCRUD](https://crudcrud.com/). Note: Service still in development. Instabilities are possible
-
-Copy this line: https://crudcrud.com/api/{{ID}} and paste it on environment file located on ./src/environment.ts
-
-PROBLEM FOUND: update endpoint have some issues and it's imposible to fix it (CORS PROBLEM). Please don't consider this as an issue itself.
+PROBLEM FOUND: update endpoint have some issues and it's imposible to fix it from my side (CORS PROBLEM). Please don't consider this as an issue itself. This could be a good test to see error handling
 
 Now we are ready to start!
 

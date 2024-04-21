@@ -1,28 +1,32 @@
-/* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
 
-import { SpinnerComponent } from './spinner.component';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { NgIf } from '@angular/common';
+import  SpinnerComponent  from './spinner.component';
+import { LoaderService } from '../../../../../services/loader/loader.service';
+
 
 describe('SpinnerComponent', () => {
   let component: SpinnerComponent;
   let fixture: ComponentFixture<SpinnerComponent>;
+  let loaderService: LoaderService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SpinnerComponent ]
+      imports: [NgIf,SpinnerComponent],
+      providers: [LoaderService]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SpinnerComponent);
     component = fixture.componentInstance;
+    loaderService = TestBed.inject(LoaderService);
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });
