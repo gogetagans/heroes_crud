@@ -66,6 +66,7 @@ export default class HeroDetailComponent implements OnDestroy {
   onSave(): void {
     const hero = this.form.value as Hero;
     this.isEditForm() ? this.updateHero(hero) : this.saveHero(hero);
+    this.router.navigate(['../heroes']);
   }
 
   /**
@@ -81,7 +82,6 @@ export default class HeroDetailComponent implements OnDestroy {
    */
   saveHero(hero: Hero): void {
     this.heroService.addHero(hero);
-    this.router.navigate(['../heroes']);
   }
 
   /**
@@ -100,7 +100,6 @@ export default class HeroDetailComponent implements OnDestroy {
    */
   updateHero(hero: Hero): void {
     this.heroService.updateHero(hero);
-    this.router.navigate(['../heroes']);
   }
 
   /**
